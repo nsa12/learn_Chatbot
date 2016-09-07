@@ -40,10 +40,15 @@ class MyChatBotView(generic.View):
 		for entry in incoming_mesage['entry']:
 			for message in entry['messaging']:
 				print message
-				sender_id = message['sender']['id']
-				message_text = message['message']['text']
-				post_facebook_message(sender_id,message_text) 
+				try:
+					sender_id = message['sender']['id']
+					message_text = message['message']['text']
+					post_facebook_message(sender_id,message_text) 
+				except Exception as e:
+					print e
+					pass
 
+		return HttpResponse()  
 
 def index(request):
 	return HttpResponse('Hello world')

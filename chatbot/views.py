@@ -35,10 +35,10 @@ class MyChatBotView(generic.View):
 		return generic.View.dispatch(self, request, *args, **kwargs)
 
 	def post(self, request, *args, **kwargs):
-		incoming_mesage= json.loads(self.request.body.decode('utf-8'))
-		print incoming_mesage
+		incoming_message= json.loads(self.request.body.decode('utf-8'))
+		print incoming_message
 
-		for entry in incoming_mesage['entry']:
+		for entry in incoming_message['entry']:
 			for message in entry['messaging']:
 				print message
 				try:

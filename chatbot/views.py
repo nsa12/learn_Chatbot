@@ -89,7 +89,7 @@ def post_facebook_message(fbid,message_text):
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg_with_button)
 	print status.json()
 
-def handle_pppostback(fbid, payload):
+def handle_postback(fbid, payload):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	output_text = 'Payload Received: ' + payload
 	logg(payload, symbol='*')

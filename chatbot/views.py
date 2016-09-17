@@ -97,7 +97,7 @@ def handle_postback(fbid, payload):
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
 
 def logg(message, symbol='-'):
-	print "%s\n%s\n%s"(symbol*10, message_symbol*10)
+	print "%s\n%s\n%s"%(symbol*10, message_symbol*10)
 
 class MyChatBotView(generic.View):
 	def get (self, request, *args, **kwargs):

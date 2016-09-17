@@ -18,6 +18,8 @@ VERIFY_TOKEN = 'ChuckyJokes'
 PAGE_ACCESS_TOKEN = 'EAAEVt7PNqTcBAMuCD4swHXmbvSIqr5zAB0H7WttXY2EZAbNJEYSOIoqJTJ5gKtQnjp7b60GZCjGMFZAgZCGkwlbmpKoroIcE0hQATK4Nm9c5DzpPIUxLVPGlwo0YyMxz80kq6HTLXTx3KkKeJq24BvJ02qFUT3ofzwQd3kSO7QZDZD'
 
 def index(request):
+	post_facebook_message('as','abc')
+	handle_postback('asd','asd')
 	#t = request.GET['text'] or 'foo'
 	output_text = chuck()
 	return HttpResponse(output_text)
@@ -97,7 +99,7 @@ def handle_postback(fbid, payload):
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
 
 def logg(message, symbol='-'):
-	print "%s\n%s\n%s"%(symbol*10, message_symbol*10)
+	print "%s\n%s\n%s"%(symbol*10, message, symbol*10)
 
 class MyChatBotView(generic.View):
 	def get (self, request, *args, **kwargs):

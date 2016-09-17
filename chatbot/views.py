@@ -86,7 +86,7 @@ def post_facebook_message(fbid,message_text):
 
 	response_msg_generic = {
 	"recipient":{
-	    "id":"USER_ID"
+	    "id":fbid
 	  },
 	  "message":{
 	    "attachment":{

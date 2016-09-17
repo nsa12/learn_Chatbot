@@ -48,7 +48,6 @@ def wikisearch(title='tomato'):
 
     return wiki_content
 
-
 def post_facebook_message(fbid,message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	
@@ -66,17 +65,17 @@ def post_facebook_message(fbid,message_text):
 		        	"template_type":"button",
 	        		"text":output_text,
 	        		"buttons":[
-	          		{
-	            		"type":"web_url",
-	            		"url":output_url
-	            		,
-	            		"title":"Show Website"
-	          		},
-	          		{
-	            		"type":"postback",
-	            		"title":"Start Chatting",
-	            		"payload":"USER_DEFINED_PAYLOAD"
-	          		}
+		          		{
+		            		"type":"web_url",
+		            		"url":output_url
+		            		,
+		            		"title":"Show Website"
+		          		},
+		          		{
+		            		"type":"postback",
+		            		"title":"Start Chatting",
+		            		"payload":"USER_DEFINED_PAYLOAD"
+		          		}
 	       			]
 	    		}
 	    	}
@@ -90,6 +89,15 @@ def post_facebook_message(fbid,message_text):
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg_with_button)
 	print status.json()
 
+def handle_pppostback(fbid, payload):
+	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
+	output_text = 'Payload Received: ' + payload
+	logg(payload, symbol='*')
+	response_msg = json.dumps({"recipient":{"id":fbid}, "message": {"text":output_text}})
+	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
+
+def logg(message, symbol='-'):
+	print "%s\n%s\n%s"(symbol*10, messagem symbol*10)
 
 class MyChatBotView(generic.View):
 	def get (self, request, *args, **kwargs):
@@ -103,12 +111,21 @@ class MyChatBotView(generic.View):
 		return generic.View.dispatch(self, request, *args, **kwargs)
 
 	def post(self, request, *args, **kwargs):
-		incoming_message= json.loads(self.request.body.decode('utf-8'))
-		print incoming_message
+		incoming_message = json.loads(self.request.body.decode('utf-8'))
+		logg(incoming_message)
 
 		for entry in incoming_message['entry']:
 			for message in entry['messaging']:
-				print message
+				
+				try:
+					if 'postback' in message:
+						handle_postback(message['sender']['id'], message['postback']['payload'])
+					else:
+						pass
+				except Exception as e:
+					print e
+					pass
+
 				try:
 					sender_id = message['sender']['id']
 					message_text = message['message']['text']

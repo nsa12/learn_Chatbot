@@ -134,10 +134,7 @@ def handle_postback(fbid, payload):
 	logg(payload, symbol='*')
 
 	if payload == 'RANDOM_JOKE':
-		post_facebook_message(fbid, foo)
-
-#	response_msg = json.dumps({"recipient":{"id":fbid}, "message": {"text":output_text}})
-#	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
+		post_facebook_message(fbid, 'foo')
 
 def logg(message, symbol='-'):
 	print "%s\n%s\n%s"%(symbol*10, message, symbol*10)

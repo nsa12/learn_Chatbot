@@ -97,7 +97,7 @@ def post_facebook_message(fbid,message_text):
 	          {
 	            "title":output_text,
 	            "item_url":"https://api.chucknorris.io/jokes/random",
-	            "image_url": output_image,
+	            "image_url": 'https://thecatapi.com/api/images/get?format=src&type=png',
 	            "subtitle":"Lolsters =D",
 	            "buttons":[
 	              {
@@ -169,9 +169,9 @@ class MyChatBotView(generic.View):
 				try:
 					sender_id = message['sender']['id']
 					message_text = message['message']['text']
-					post_facebook_message(sender_id,message_text) 
+					post_facebook_message(sender_id,message_text)
 				except Exception as e:
-					print e
+					logg(e, symbol='174')
 					pass
 
 		return HttpResponse()

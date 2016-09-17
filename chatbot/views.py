@@ -26,7 +26,7 @@ def chuck():
 	url = 'https://api.chucknorris.io/jokes/random'
 	resp = requests.get(url=url).text
 	data = json.loads(resp)
-	return data['value']
+	return data['value'], data['url']
 
 def wikisearch(title='tomato'):
     url = 'https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles=%s'%(title)
@@ -52,7 +52,7 @@ def wikisearch(title='tomato'):
 def post_facebook_message(fbid,message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	
-	output_text = chuck()
+	output_text, output_url = chuck()
 	output_text = output_text.replace('Chuck Norris', 'Rajnikant')
 
 	response_msg_with_button = {
@@ -68,7 +68,8 @@ def post_facebook_message(fbid,message_text):
 	        		"buttons":[
 	          		{
 	            		"type":"web_url",
-	            		"url":"https://petersapparel.parseapp.com",
+	            		"url":output_url
+	            		,
 	            		"title":"Show Website"
 	          		},
 	          		{

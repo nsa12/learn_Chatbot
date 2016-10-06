@@ -33,6 +33,9 @@ def quizGen():
 	return dict(answer=answer, options=options)
 
 def index(request):
+	post_facebook_message('as', 'asd')
+	handle_quickreply('as', 'asd')
+
 	output_text = quizGen()
 	output_text = pprint.pformat(output_text)
 #	print output_text
@@ -204,6 +207,13 @@ def handle_postback(fbid, payload):
 def handle_quickreply(fbid, payload):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	logg(payload, symbol='--QR--')
+	if payload.split(':')][0] == payload.split(':')][1]:
+		logg('Correct Answer', symbol='-YES-')
+		output_text = 'Correct Answer'
+	else:
+		logg('Incorrect Answer', symbol='-NO-')
+		output_text = 'Wrong Answer'
+
 	return
 
 def logg(message, symbol='-'):

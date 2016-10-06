@@ -212,7 +212,7 @@ class MyChatBotView(generic.View):
 					message_text = message['message']['text']
 					post_facebook_message(sender_id,message_text)
 				except Exception as e:
-					logg(e, symbol='174')
+					logg(e, symbol='--147--')
 					pass
 
 		return HttpResponse()

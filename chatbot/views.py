@@ -144,22 +144,22 @@ def post_facebook_message(fbid,message_text):
 		    {
 		    	"content_type":"text",
 		        "title":quiz['options'][0],
-		        "payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_RED"
+		        "payload":"%s:%s"%(quiz['answer'][0], quiz['options'][0])
 		    },
 		    {
 			    "content_type":"text",
 		    	"title":quiz['options'][1],
-		    	"payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_GREEN"
+		    	"payload":"%s:%s"%(quiz['answer'][0], quiz['options'][1])
 		    }
 		    {
 			    "content_type":"text",
 		    	"title":quiz['options'][2]
-		    	"payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_BLUE"
+		    	"payload":"%s:%s"%(quiz['answer'][0], quiz['options'][2])
 		    }
 		    {
 			    "content_type":"text",
 		    	"title":quiz['options'][3]
-		    	"payload":"DEVELOPER_DEFINED_PAYLOAD_FOR_PICKING_YELLOW"
+		    	"payload":"%s:%s"%(quiz['answer'][0], quiz['options'][3])
 		    }
 		    ]
 		}

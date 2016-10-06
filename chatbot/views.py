@@ -204,9 +204,16 @@ class MyChatBotView(generic.View):
 					else:
 						pass
 				except Exception as e:
-					print e
-					pass
-
+					logg(e,symbol('--140--'))
+				
+				try:
+					if 'quick_reply' in message['message']:
+						handle_quickreply(message['sender']['id'], message['message']['quick_reply']['payload'])
+					else:
+						pass
+				except Exception as e:
+					logg(e,symbol('--143--'))
+				
 				try:
 					sender_id = message['sender']['id']
 					message_text = message['message']['text']

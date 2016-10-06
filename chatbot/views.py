@@ -32,6 +32,11 @@ def quizGen():
 	random.shuffle(options)
 	return dict(answer=answer, options=options)
 
+def handle_quickreply(fbid, payload):
+	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
+	logg(payload, symbol='--QR--')
+	return
+
 def index(request):
 	output_text = quizGen()
 	output_text = pprint.pformat(output_text)

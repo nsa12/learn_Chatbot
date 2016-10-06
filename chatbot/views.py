@@ -32,7 +32,21 @@ def quizGen():
 	random.shuffle(options)
 	return dict(answer=answer, options=options)
 
+def set_greeting_text():
+	post_message_url = "https://graph.facebook.com/v2.6/me/thread_settings?access_token=%s"%PAGE_ACCESS_TOKEN
+	request_msg = {
+		"setting_type":"greeting",
+		"greeting":{
+			"text":"Pokemon Quizz"
+		}
+	}
+	status = requests.post(post_message_url, headers={"Content-Type": "application/json"}, data=response_msg_quikreply)
+	print status
+	logg(payload, symbol='--GM--')
+
+
 def index(request):
+	set_greeting_text()
 	post_facebook_message('as', 'asd')
 	handle_quickreply('as', 'asd')
 
@@ -204,6 +218,9 @@ def handle_postback(fbid, payload):
 	if payload == 'RANDOM_JOKE':
 		post_facebook_message(fbid, 'foo')
 
+def logg(message, symbol='-'):
+	print "%s\n%s\n%s"%(symbol*10, message, symbol*10)
+
 def handle_quickreply(fbid, payload):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	logg(payload, symbol='--QR--')
@@ -214,10 +231,10 @@ def handle_quickreply(fbid, payload):
 		logg('Incorrect Answer', symbol='-NO-')
 		output_text = 'Wrong Answer'
 
-	return
+	response_msg = json.dumps(('recipient':{'id':fbid}, "message": {"text":output_text}))
+	status = requests.post(post_message_url, header{'Content-Type', 'application/json'}, data=response_msg)
 
-def logg(message, symbol='-'):
-	print "%s\n%s\n%s"%(symbol*10, message, symbol*10)
+	return
 
 class MyChatBotView(generic.View):
 	def get (self, request, *args, **kwargs):

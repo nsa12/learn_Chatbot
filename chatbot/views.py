@@ -102,8 +102,7 @@ def post_facebook_message(fbid,message_text):
 	        		"buttons":[
 		          		{
 		            		"type":"web_url",
-		            		"url":output_url
-		            		,
+		            		"url":output_url,
 		            		"title":"Show Website"
 		          		},
 		          		{
